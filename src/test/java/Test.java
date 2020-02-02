@@ -1,4 +1,5 @@
 
+import com.util.HbaseUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
@@ -8,7 +9,7 @@ import org.apache.hadoop.hbase.client.Admin;
 import org.apache.hadoop.hbase.client.Connection;
 import org.apache.hadoop.hbase.client.ConnectionFactory;
 
-
+import java.io.IOException;
 
 
 /**
@@ -41,4 +42,47 @@ public class Test
         admin.close();
         conn.close();
     }
+    HbaseUtil hBaseClient = new HbaseUtil();
+    /**
+     * 测试删除、创建表
+     */
+    @org.junit.Test
+    public void testGetValue() {
+        String value = hBaseClient.getValue("tbl_abc", "rowKey1", "info", "age");
+        System.out.println(value);
+    }
+
+    @org.junit.Test
+    public void CreateTable() throws IOException {
+        String tableName = "tbl_abc";
+        hBaseClient.deleteTable(tableName);
+        hBaseClient.createTable(tableName, new String[] {"cf1", "cf2"});
+    }
+
+    @org.junit.Test
+    public void dropTable() throws IOException {
+        hBaseClient.deleteTable("tbl_abc");
+    }
+
+
+    @org.junit.Test
+    public void testInsertOrUpdate() throws IOException {
+        hBaseClient.insertOrUpdate("tbl_abc", "rowKey1", "cf1", new String[]{"c1", "c2"}, new String[]{"v1", "v22"});
+    }
+
+
+    @org.junit.Test
+    public void testScanTable() throws IOException {
+        hBaseClient.scanTable("tbl_abc", "rowKey1");
+    }
+    @org.junit.Test
+    public void testgGetRow() throws IOException {
+        hBaseClient.getRow("tbl_abc", "rowKey1");
+    }
+
+    @org.junit.Test
+    public void testGetRowQualifier() throws IOException {
+        hBaseClient.getRowQualifier("tbl_abc", "rowKey1","cf1","c1");
+    }
+
 }
