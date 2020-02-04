@@ -1,5 +1,7 @@
 
 import com.util.HbaseUtil;
+import com.util.KaConsumer;
+import com.util.KaProducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
@@ -84,5 +86,21 @@ public class Test
     public void testGetRowQualifier() throws IOException {
         hBaseClient.getRowQualifier("tbl_abc", "rowKey1","cf1","c1");
     }
+    KaProducer producer =new KaProducer();
+    @org.junit.Test
+    public void testkafkaSend() {
+        String name = "first";
+        String val = "test--";
+        for (int i = 0; i < 50; i++) {
+          producer.send(name,val+i);
 
+        }
+    }
+
+    KaConsumer cos=new KaConsumer();
+    @org.junit.Test
+    public void testKaConsumer() throws IOException {
+        String name = "first";
+        cos.kafkaGet(name);
+    }
 }
