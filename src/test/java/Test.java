@@ -1,7 +1,7 @@
 
 import com.util.HbaseUtil;
-import com.util.KaConsumer;
-import com.util.KaProducer;
+import com.kafka.KaConsumer;
+import com.kafka.KaProducer;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
