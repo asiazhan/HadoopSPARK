@@ -1,5 +1,5 @@
 
-import com.util.HbaseUtil;
+import com.hbase.HbaseUtil;
 import com.kafka.KaConsumer;
 import com.kafka.KaProducer;
 import org.apache.hadoop.conf.Configuration;
