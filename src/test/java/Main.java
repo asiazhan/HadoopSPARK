@@ -1,4 +1,4 @@
-import com.util.PropertiesUtil;
+import com.kafka.PropertiesUtil;
 
 import java.io.IOException;
 

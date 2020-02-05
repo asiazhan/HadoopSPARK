@@ -1,4 +1,4 @@
-package com.util;
+package com.kafka;
 
 import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang.StringUtils;

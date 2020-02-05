@@ -1,4 +1,4 @@
-package com.util;
+package com.hbase;
 
 
 import org.apache.commons.lang.StringUtils;
