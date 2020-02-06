@@ -6,6 +6,7 @@
 
     <groupId>hadoop</groupId>
     <artifactId>test</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <build>
         <plugins>
@@ -19,6 +20,11 @@
             </plugin>
         </plugins>
     </build>
+    <modules>
+        <module>spark</module>
+        <module>kafka</module>
+        <module>hbase</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <hive.version>2.3.4</hive.version>
@@ -28,12 +34,6 @@
         <scala.version>2.11</scala.version>
     </properties>
 <dependencies>
-<!--    <dependency>-->
-<!--        <groupId>mysql</groupId>-->
-<!--        <artifactId>mysql-connector-java</artifactId>-->
-<!--        <version>5.6.44</version>-->
-<!--    </dependency>-->
-
     <dependency>
         <groupId>org.apache.hadoop</groupId>
         <artifactId>hadoop-common</artifactId>
@@ -126,7 +126,7 @@
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>5.6.44</version>
+        <version>6.0.4</version>
     </dependency>
     <dependency>
         <groupId>junit</groupId>
