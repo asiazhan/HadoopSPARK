@@ -9,7 +9,7 @@ public class KaProducer {
     static Properties props=new Properties();
     static{
 //        props.put("bootstrap.servers", "master:9092");//kafka集群，broker-list
-        props.put("bootstrap.servers", "master:9092,node1:9092,node2:9092,node3:9092,");//kafka集群，broker-list
+        props.put("bootstrap.servers", "master:9092,node1:9092,node2:9092,node3:9092");//kafka集群，broker-list
         props.put("acks", "all");
         props.put("retries", 1);//重试次数
         props.put("batch.size", 16384);//批次大小

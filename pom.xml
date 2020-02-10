@@ -78,12 +78,6 @@
         <groupId>org.apache.hbase</groupId>
         <artifactId>hbase-server</artifactId>
         <version>${hbase.version}</version>
-        <exclusions>
-            <exclusion>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-            </exclusion>
-        </exclusions>
     </dependency>
     <dependency>
         <groupId>org.apache.hbase</groupId>
@@ -96,42 +90,7 @@
         <artifactId>kafka-clients</artifactId>
         <version>${kafka.version}</version>
     </dependency>
-    <!-- spark client -->
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-hive_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-    <groupId>org.apache.spark</groupId>
-    <artifactId>spark-streaming-kafka_${scala.version}</artifactId>
-    <version>1.6.3</version>
-   </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-mllib_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
+
     <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
