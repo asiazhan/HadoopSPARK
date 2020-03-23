@@ -1,7 +1,9 @@
 package util
 
 
-import java.util
+//import java.util
+import java.util.Set
+import java.util.HashSet
 
 import org.apache.commons.lang3.StringUtils
 import org.apache.commons.pool.impl.GenericObjectPool
@@ -33,7 +35,7 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
       //命令响应时间 ms
       var readTimeout = "18000"
       //链接server超时时间
-      val connectTimeout = "18000"
+      var connectTimeout = "18000"
       if(!StringUtils.isBlank(passwordTmp)){
         pw = passwordTmp
       }
@@ -50,7 +52,7 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
       nodes = redisInfo.getIp.split(",")
       //端口列表
       val ports = redisInfo.getPort.split(",")
-      val hostAndPort: Set[HostAndPort] = new util.HashSet[HostAndPort]
+      val hostAndPort: Set[HostAndPort]  = new HashSet[HostAndPort]
       //端口和IP组合
       for(node <- nodes){
         for(port <- ports){
@@ -58,9 +60,10 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
         }
       }
       if(!StringUtils.isBlank(pw)){
-        jedisCluster = new JedisCluster(hostAndPort,connectTimeout.toInt,readTimeout.toInt,maxRedirects.toInt,pw,poolConfig)
+        jedisCluster = new JedisCluster(hostAndPort,connectTimeout.toInt,readTimeout.toInt,maxRedirects.toInt,pw,redisName,poolConfig)
       }else{
         jedisCluster = new JedisCluster(hostAndPort,connectTimeout.toInt,readTimeout.toInt,maxRedirects.toInt,poolConfig)
+
       }
     }catch {
       case e:Exception =>{
@@ -69,7 +72,7 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
       }
     }
   }
-  def createByName(redisName: String): RedisConnection = {
+  def createByName(redisName: String): RdisConnection = {
     val poolConfig = new JedisPoolConfig
     val redisInfo = resiaInfoMap(redisName)
     val redisInfoObject = redisInfo.asInstanceOf[RedisInfo]
