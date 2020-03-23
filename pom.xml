@@ -96,6 +96,14 @@
         <artifactId>mysql-connector-java</artifactId>
         <version>6.0.4</version>
     </dependency>
+
+<!--    <dependency>-->
+<!--        <groupId>redis.clients</groupId>-->
+<!--        <artifactId>jedis</artifactId>-->
+<!--        <version>3.1.0</version>-->
+<!--&lt;!&ndash;        <type>jar</type>&ndash;&gt;-->
+<!--&lt;!&ndash;        <scope>compile</scope>&ndash;&gt;-->
+<!--    </dependency>-->
     <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>

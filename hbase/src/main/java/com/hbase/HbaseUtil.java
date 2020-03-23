@@ -29,6 +29,12 @@ public class HbaseUtil {
             admin = conn.getAdmin();
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                admin.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -98,11 +104,7 @@ public class HbaseUtil {
         }
     }
 
-    public void deleteRow1(String tableName, String rowKey) throws IOException {
-        Table table = conn.getTable(TableName.valueOf(tableName));
-        Delete delete = new Delete(rowKey.getBytes());
-        table.delete(delete);
-    }
+
 
 
     public void createTable1(String tableName, String[] columnFamilies) throws IOException {

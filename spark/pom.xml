@@ -56,5 +56,10 @@
         <artifactId>spark-mllib_${scala.version}</artifactId>
         <version>${spark.version}</version>
     </dependency>
+    <dependency>
+        <groupId>redis.clients</groupId>
+        <artifactId>jedis</artifactId>
+        <version>3.1.0</version>
+    </dependency>
     </dependencies>
 </project>

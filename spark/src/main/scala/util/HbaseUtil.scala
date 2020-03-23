@@ -4,7 +4,7 @@ import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.hbase.client._
 import org.slf4j.LoggerFactory
 
-object Util {
+object HbaseUtil {
   val log  = LoggerFactory.getLogger(getClass)
   private var hbaseConnectionFactory : HbaseConnectionFactory = _
   private var initialized = false
