@@ -10,52 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spark</artifactId>
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <hive.version>2.3.4</hive.version>
-        <hbase.version>2.0.4</hbase.version>
-        <kafka.version>2.2.0</kafka.version>
-        <spark.version>2.4.3</spark.version>
-        <hadoop.version>2.8.5</hadoop.version>
-        <scala.version>2.11</scala.version>
-    </properties>
-    <!-- spark client -->
-    <dependencies>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-core_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-sql_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-hive_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-streaming-kafka_${scala.version}</artifactId>
-        <version>1.6.3</version>
-    </dependency>
-    <dependency>
-        <groupId>org.apache.spark</groupId>
-        <artifactId>spark-mllib_${scala.version}</artifactId>
-        <version>${spark.version}</version>
-    </dependency>
 
-    </dependencies>
+
 </project>
