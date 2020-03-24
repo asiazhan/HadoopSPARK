@@ -8,7 +8,7 @@ object Demo1 {
       val conf = new SparkConf().setAppName("Hehho").setMaster("local[*]")
 
       val sc = new SparkContext(conf)
-
+      val path = use.
       //    val spark = new SparkSession(sc)
       val spark = SparkSession.builder().config(conf).getOrCreate()
       val df = spark.read.json("/usr/local/spark2.4/work/test.json")
