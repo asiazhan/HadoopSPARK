@@ -1,17 +1,17 @@
 package util
 
 
-//import java.util
-import java.util.Set
-import java.util.HashSet
+import java.util
 
 import org.apache.commons.lang3.StringUtils
-import org.apache.commons.pool.impl.GenericObjectPool
+import org.apache.commons.pool2.impl.GenericObjectPoolConfig
 import org.slf4j.LoggerFactory
-import redis.clients.jedis._
+import redis.clients.jedis.{HostAndPort, JedisCluster, JedisPoolConfig}
+
+import scala.collection.mutable
 
 
-class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Serializable {
+class RedisConnectionFactory(resiaInfoMap: mutable.Map[String, RedisInfo]) extends Serializable {
   val log  = LoggerFactory.getLogger(getClass)
 
   /**
@@ -21,7 +21,7 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
    * @param redisInfo
    * @return
    */
-  private def createCluster(redisName: String,poolConfig: GenericObjectPool, redisInfo: RedisInfo): JedisCluster = {
+  private def createCluster(redisName: String, poolConfig: GenericObjectPoolConfig[Object], redisInfo: RedisInfo): JedisCluster = {
     var nodes = Array[String]()
     var jedisCluster: JedisCluster = null
     try {
@@ -52,7 +52,7 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
       nodes = redisInfo.getIp.split(",")
       //端口列表
       val ports = redisInfo.getPort.split(",")
-      val hostAndPort: Set[HostAndPort]  = new HashSet[HostAndPort]
+      val hostAndPort: util.Set[HostAndPort]  = new util.HashSet[HostAndPort]
       //端口和IP组合
       for(node <- nodes){
         for(port <- ports){
@@ -71,12 +71,13 @@ class RedisConnectionFactory(resiaInfoMap: Map[String, RedisInfo]) extends Seria
         throw e
       }
     }
+    jedisCluster
   }
   def createByName(redisName: String): RdisConnection = {
     val poolConfig = new JedisPoolConfig
     val redisInfo = resiaInfoMap(redisName)
     val redisInfoObject = redisInfo.asInstanceOf[RedisInfo]
-    val clusterTable = createCluster(redisName,poolConfig,redisInfoObject)
-    return new RedisConnection(clusterTable)
+    val clusterTable = createCluster(redisName, poolConfig.asInstanceOf, redisInfoObject)
+    return new RdisConnection(clusterTable)
   }
 }
