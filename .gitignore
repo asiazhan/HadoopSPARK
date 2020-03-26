@@ -3,4 +3,5 @@
 out
 get
 target
-*.iml
+*.class
+classes
