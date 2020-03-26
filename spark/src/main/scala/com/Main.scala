@@ -10,9 +10,9 @@ import util.CaseConf
 object Main {
   def main(args: Array[String]): Unit = {
     //获取集群入口
-    val conf = new CaseConf("ghdhjdjk")
-    val sc = SparkStreamingUtils.createStringContext(conf)
-    val lines = SparkStreamingUtils.getDataByKafka(conf, sc)
-
+//    val conf = new CaseConf("ghdhjdjk")
+//    val sc = SparkStreamingUtils.createStringContext(conf)
+//    val lines = SparkStreamingUtils.getDataByKafka(conf, sc)
+   println()
   }
 }

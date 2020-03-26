@@ -1,11 +1,11 @@
 package com.streaming
 
-import kafka.serializer.StringDecoder
-import org.apache.commons.lang3.StringUtils
+import org.apache.commons.lang.StringUtils
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.spark.SparkConf
+import org.apache.spark.broadcast.Broadcast
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
-import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
+import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies, OffsetRange}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import util.CaseConf
 
@@ -29,7 +29,7 @@ object SparkStreamingUtils extends Serializable {
       .set("spark.streaming.kafka.maxRatePerPartition", "2000")
 
     val conf = caseConf.get("spark.conf", "")
-    if (StringUtils.isNoneBlank(conf)) {
+    if (!StringUtils.isBlank(conf)) {
       for (kv <- conf.split("@@")) {
         var arr = kv.split("=")
         sparkConf.set(arr(0), arr(1))
@@ -37,13 +37,13 @@ object SparkStreamingUtils extends Serializable {
     }
 
     val scc = new StreamingContext(sparkConf, Seconds(bacthtime))
-    if (StringUtils.isNoneBlank(checkpoint) && !"defaultCheckpoint".equals(checkpoint)) {
+    if (!StringUtils.isBlank(checkpoint) && !"defaultCheckpoint".equals(checkpoint)) {
       scc.checkpoint(checkpoint)
     }
     scc
   }
 
-  def getDataByKafka(caseConf: CaseConf, scc: StreamingContext): DStream[String]={
+  def getDataByKafka(caseConf: CaseConf, scc: StreamingContext): InputDStream[ConsumerRecord[String, String]]={
     val ip = caseConf.get("metadata.broker.list")
     val groupId = caseConf.get("group.id")
     val kafkaParams=Map("metadata.broker.list"->ip,"group.id"->groupId)
@@ -53,7 +53,23 @@ object SparkStreamingUtils extends Serializable {
       LocationStrategies.PreferConsistent,
       ConsumerStrategies.Subscribe[String, String](topicsSet, kafkaParams)
     )
-    val lines: DStream[String] = dstream.map(_.value)
-    lines
+//    val lines: DStream[String] = dstream.map(_.value)
+    dstream
+  }
+
+  def getCaseConf(args: Array[String], dir: String):CaseConf = {
+    var caseConf: CaseConf = null
+    if(dir.contains("HadoopAPARK")){
+      val fileName = args(0)
+      val path = "file:///" + dir + "\\resources\\" + fileName
+      caseConf = new CaseConf(path)
+    }else{
+      caseConf = new CaseConf(args(0))
+    }
+    caseConf
+  }
+
+  def saveOffset(offsetRange: Array[OffsetRange], broadcastConf: Broadcast[CaseConf]) ={
+
   }
 }
